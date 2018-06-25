@@ -5,6 +5,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import labs.rr.kafka.message.service.MessageReceiver;
@@ -38,6 +39,7 @@ public class KafkaReceiverImpl implements MessageReceiver {
 	 * @throws MessageException
 	 */
 	@Override
+	@KafkaListener(topics = {"labs.rr.topic"})
 	public void receive(final ConsumerRecord<?, ?> consumerRecord) throws MessageException {
 		try {
 			LOG.info("Recebendo mesangem: " + consumerRecord.toString());
